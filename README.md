@@ -1,66 +1,187 @@
-"# Kingo-Biblio" 
-Markdown
+# 📚 Kingo Biblio
 
-#  Kingo-Biblio
+Application de gestion de bibliothèque développée avec Spring Boot.
 
-Kingo-Biblio est une application web de gestion de bibliothèque universitaire développée avec **Java** et **Spring Boot**. Elle permet de gérer efficacement le stock de livres, les membres de la bibliothèque et le suivi des emprunts.
+Ce projet permet de gérer les livres, les exemplaires physiques, les membres, les emprunts et les statistiques de la bibliothèque via une API REST.
 
-##  Fonctionnalités principales
+---
+## Cas d'utilisation
 
-* **Gestion des livres :** Ajout, consultation et suivi du stock disponible.
-* **Gestion des membres :** Enregistrement et suivi des emprunts par membre.
-* **Suivi des emprunts :** Calcul des dates de retour et gestion de la disponibilité des ouvrages.
-* **Interface intuitive :** Rendu dynamique des données grâce à **Thymeleaf**.
+1. Ajouter un membre
+2. Ajouter un livre
+3. Ajouter un exemplaire
+4. Enregistrer un emprunt
+5. Enregistrer un retour
+6. Consulter les statistiques
+7. Identifier les retards
 
-##  Stack Technique
+## 🚀 Fonctionnalités
 
-* **Langage :** Java 21 (LTS)
-* **Framework :** Spring Boot 3.5
-* **Base de données :** MySQL
-* **Moteur de template :** Thymeleaf
-* **Design :** Tailwind CSS
-* **Build Tool :** Maven
+### Gestion des livres
 
-##  Architecture
+- Ajouter un livre
+- Modifier un livre
+- Supprimer un livre
+- Consulter la liste des livres
+- Rechercher un livre
 
-Le projet est structuré selon une architecture MVC (Modèle-Vue-Contrôleur) pour garantir une maintenance facilitée et une séparation claire des responsabilités :
+### Gestion des exemplaires
 
-* `controller` : Gère les requêtes HTTP et le lien avec la vue.
-* `service` : Contient toute la logique métier et les règles de gestion.
-* `repository` : Gère les interactions avec la base de données MySQL via Spring Data JPA.
-* `model` : Définit les entités (Livre, Membre, Emprunt).
+- Ajouter un exemplaire
+- Consulter les exemplaires disponibles
+- Vérifier la disponibilité d'un exemplaire
 
-##  Installation
+### Gestion des membres
 
-1. Clone le projet :
-   ```bash
-   git clone [https://github.com/shijogoog/Kingo-Biblio.git](https://github.com/shijogoog/Kingo-Biblio.git)
+- Ajouter un membre
+- Modifier un membre
+- Supprimer un membre
+- Rechercher un membre
 
-    Configure ta base de données MySQL dans src/main/resources/application.properties.
+### Gestion des emprunts
 
-    Lance l'application avec Maven :
-    Bash
+- Enregistrer un emprunt
+- Enregistrer un retour
+- Consulter les emprunts en cours
+- Historique des emprunts
 
-    mvn spring-boot:run
+### Statistiques
 
-    Accède à l'interface via : http://localhost:8080/management/panel
+- Nombre total de livres
+- Nombre total de membres
+- Nombre d'emprunts
+- Livres les plus empruntés
+- Alertes de retard
 
-👨‍💻 À propos
+---
 
-Projet réalisé dans le cadre d'un apprentissage approfondi du développement backend avec Spring Boot et Java.
+## 🛠 Technologies utilisées
 
-Développé avec passion pour le code propre et robuste.
+- Java 21
+- Spring Boot 3.5.x
+- Spring Data JPA
+- Hibernate
+- MySQL
+- Maven
 
+---
 
-***
+## 📂 Architecture
 
-### Pourquoi ce `README.md` est top :
-1.  **Structure claire :** Les recruteurs scannent les README très vite. Avec des titres et des listes à puces, ils comprendront immédiatement ce que tu as fait.
-2.  **Mots-clés :** Il contient les technologies (Java 21, Spring Boot, MySQL, Thymeleaf), ce qui aide ton projet à être mieux indexé si quelqu'un cherche ces compétences sur GitHub.
-3.  **Appel à l'action :** Il explique comment lancer ton projet, ce qui est très apprécié si jamais un jour tu veux le montrer à un mentor ou un ami.
+```text
+src/main/java
+│
+├── controller
+├── service
+├── repository
+├── model
+├── dto
+├── exception
+└── config
+```
 
-Une fois que tu as enregistré ce texte dans ton fichier `README.md`, n'oublie pas de faire :
+L'application suit une architecture en couches :
+
+- Controller → API REST
+- Service → logique métier
+- Repository → accès aux données
+- DTO → transfert de données
+
+---
+
+## ⚙️ Installation
+
+### 1. Cloner le projet
+
 ```bash
-git add README.md
-git commit -m "Mise à jour du README"
-git push
+git clone https://github.com/VOTRE-USERNAME/kingo-biblio.git
+cd kingo-biblio
+```
+
+### 2. Créer la base MySQL
+
+```sql
+CREATE DATABASE bibliotheque;
+```
+
+### 3. Configurer la connexion
+
+Modifier :
+
+```properties
+src/main/resources/application.properties
+```
+
+Exemple :
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/bibliotheque
+spring.datasource.username=root
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+### 4. Lancer l'application
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+## 📡 API REST
+
+### Livres
+
+| Méthode | Endpoint |
+|----------|----------|
+| GET | /api/livres |
+| GET | /api/livres/{id} |
+| POST | /api/livres |
+| PUT | /api/livres/{id} |
+| DELETE | /api/livres/{id} |
+
+### Membres
+
+| Méthode | Endpoint |
+|----------|----------|
+| GET | /api/membres |
+| POST | /api/membres |
+| PUT | /api/membres/{id} |
+| DELETE | /api/membres/{id} |
+
+### Emprunts
+
+| Méthode | Endpoint |
+|----------|----------|
+| POST | /api/emprunts |
+| PUT | /api/emprunts/retour |
+| GET | /api/emprunts |
+
+---
+
+## 📊 Statistiques disponibles
+
+- Livres les plus empruntés
+- Nombre d'emprunts sur une période
+- Membres enregistrés
+- Retards de retour
+
+---
+
+## 🔮 Améliorations futures
+
+- Documentation Swagger/OpenAPI
+- Authentification JWT
+- Interface Web (Angular / React)
+- Gestion des réservations
+- Notifications automatiques
+
+---
+
+## 👨‍💻 Auteur : WOGLO Lincoln Shijo
+
+Projet réalisé dans le cadre d'un portfolio Java / Spring Boot.
