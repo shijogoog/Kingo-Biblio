@@ -1,6 +1,5 @@
 package kingo_bibio.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,33 +21,59 @@ public class Livre {
     @Column(nullable = false)
     private String auteur;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true, nullable = false)
     private String isbn;
 
-    @Column(name = "quantite_disponible", nullable = false)
-    private Integer quantiteDisponible;
+    private String categorie;
 
+    // --- constructeurs ---
     public Livre() {}
 
-    public Livre(String titre, String auteur, String isbn, Integer quantiteDisponible) {
+    public Livre(String titre, String auteur, String isbn, String categorie) {
         this.titre = titre;
         this.auteur = auteur;
         this.isbn = isbn;
-        this.quantiteDisponible = quantiteDisponible;
+        this.categorie = categorie;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // --- getters & setters ---
+    public Long getId() {
+        return id;
+    }
 
-    public String getTitre() { return titre; }
-    public void setTitre(String titre) { this.titre = titre; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getAuteur() { return auteur; }
-    public void setAuteur(String auteur) { this.auteur = auteur; }
+    public String getTitre() {
+        return titre;
+    }
 
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
 
-    public Integer getQuantiteDisponible() { return quantiteDisponible; }
-    public void setQuantiteDisponible(Integer quantiteDisponible) { this.quantiteDisponible = quantiteDisponible; }
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
 }
